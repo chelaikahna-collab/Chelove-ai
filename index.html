@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chelove AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head><body class="bg-pink-50">
+<header class="bg-white p-4 flex justify-between border-b">
+<b class="text-pink-600">Chelove AI</b>
+<button id="b" class="bg-pink-600 text-white px-4 py-2 rounded-full">+ Ekri</button>
+</header>
+<div id="f" class="hidden bg-white p-4">
+<input id="t" placeholder="Tit" class="w-full border p-2 rounded mt-2">
+<textarea id="s" placeholder="Istwa..." class="w-full border p-2 rounded mt-2 h-24"></textarea>
+<button id="p" class="bg-pink-600 text-white w-full p-2 rounded mt-2">Pibliye</button>
+</div>
+<main class="p-4"><div id="l"></div></main>
+<script>
+b=document.getElementById('b');f=document.getElementById('f');l=document.getElementById('l');
+b.onclick=()=>f.classList.toggle('hidden');
+document.getElementById('p').onclick=()=>{
+let T=t.value,S=s.value;if(!T||!S)return alert('Mete tit ak istwa');
+let d=JSON.parse(localStorage.getItem('d')||'[]');d.unshift({T,S});
+localStorage.setItem('d',JSON.stringify(d));t.value='';s.value='';f.classList.add('hidden');r();
+};
+function r(){let d=JSON.parse(localStorage.getItem('d')||'[]');
+l.innerHTML=d.length?d.map(x=>`<div class="bg-white p-3 rounded border mb-2"><b>${x.T}</b><p class="text-sm mt-1">${x.S}</p></div>`).join(''):'<p class="text-center text-gray-400 mt-10">Poko gen feyton. Peze + Ekri!</p>';}r();
+</script>
+</body></html>
