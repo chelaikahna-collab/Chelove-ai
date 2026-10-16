@@ -4,27 +4,32 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Chelove AI</title>
 <script src="https://cdn.tailwindcss.com"></script>
-</head><body class="bg-pink-50">
-<header class="bg-white p-4 flex justify-between border-b">
+</head>
+<body class="bg-pink-50">
+<header class="bg-white p-4 flex justify-between">
 <b class="text-pink-600">Chelove AI</b>
-<button id="btn" class="bg-pink-600 text-white px-4 py-2 rounded-full">+ Ekri</button>
+<button id="btn" class="bg-pink-600 text-white px-4 py-1 rounded-full">+ Ekri</button>
 </header>
 <div id="form" class="hidden bg-white p-4">
-<input id="tit" placeholder="Tit feyton" class="w-full border p-2 rounded mt-2">
-<textarea id="txt" placeholder="Ekri istwa w..." class="w-full border p-2 rounded mt-2 h-24"></textarea>
+<input id="tit" placeholder="Tit feyton..." class="w-full border p-2 rounded">
+<textarea id="txt" placeholder="Ekri istwa w..." class="w-full border p-2 rounded h-24 mt-2"></textarea>
 <button id="pub" class="bg-pink-600 text-white w-full p-2 rounded mt-2">Pibliye</button>
 </div>
 <main class="p-4"><div id="lis"></div></main>
 <script>
 let b=document.getElementById('btn'),f=document.getElementById('form'),l=document.getElementById('lis');
 b.onclick=()=>f.classList.toggle('hidden');
-pub.onclick=()=>{
-let t=tit.value,s=txt.value;if(!t||!s)return alert('Mete tit!');
-let d=JSON.parse(localStorage.getItem('f')||'[]');d.unshift({t,s});
-localStorage.setItem('f',JSON.stringify(d));tit.value='';txt.value='';f.classList.add('hidden');show();
+document.getElementById('pub').onclick=()=>{
+let t=document.getElementById('tit').value,s=document.getElementById('txt').value;
+if(!t||!s)return alert('Mete tit ak istwa!');
+let d=JSON.parse(localStorage.getItem('f')||'[]');d.unshift({t,s});localStorage.setItem('f',JSON.stringify(d));
+document.getElementById('tit').value='';document.getElementById('txt').value='';f.classList.add('hidden');show();
 };
-function show(){let d=JSON.parse(localStorage.getItem('f')||'[]');
-l.innerHTML=d.length?d.map(x=>`<div class="bg-white p-3 rounded border mb-2"><b>${x.t}</b><p class="mt-1">${x.s}</p></div>`).join(''):'<p class="text-center text-gray-400 mt-10">Poko gen feyton. Peze + Ekri!</p>';}
+function show(){
+let d=JSON.parse(localStorage.getItem('f')||'[]');
+if(!d.length){l.innerHTML='<p style=text-align:center;color:gray;margin-top:30px>Poko gen feyton<br>Klike + Ekri!</p>';return}
+l.innerHTML=d.map(x=>'<div style=background:white;padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eee><b>'+x.t+'</b><p style=margin-top:5px>'+x.s+'</p></div>').join('');
+}
 show();
 </script>
 </body></html>
