@@ -33,3 +33,28 @@ l.innerHTML=d.map(x=>'<div style=background:white;padding:12px;border-radius:8px
 show();
 </script>
 </body></html>
+
+<!DOCTYPE html><html lang="ht"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Chelove App</title><style>body{background:#4a0a0a;color:#f5d78e;font-family:serif;margin:0;padding:10px} .top{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#2a0a0a;border-radius:15px} .btnE{background:#f5d78e;color:#4a0a0a;padding:10px 18px;border-radius:20px;font-weight:bold;border:none;cursor:pointer} .card{background:#2a0a0a;border:2px solid #d4a85c;border-radius:20px;padding:18px;margin:12px auto;max-width:450px} textarea{width:95%;height:200px;border-radius:12px;padding:12px;font-family:serif} .btn{background:#f5d78e;color:#4a0a0a;padding:14px;border-radius:30px;font-weight:bold;border:none;width:100%;margin-top:10px;cursor:pointer}</style></head><body>
+<div class="top"><div>💖🌹 <b>Chelove</b></div><button class="btnE" onclick="document.getElementById('ekri').style.display='block'">+ Ekri</button></div>
+
+<div id="ekri" style="display:none" class="card">
+<h3>✍️ Ekri Nouvo Epizòd</h3>
+<input id="tit" placeholder="Tit Epizòd la - ex: SE LI MWEN VLE Ep2" style="width:95%;padding:10px;border-radius:10px"><br><br>
+<textarea id="istwa" placeholder="Ekri feyton ou a la..."></textarea>
+<button class="btn" onclick="publie()">Pibliye Epizòd la</button>
+</div>
+
+<div class="card" id="lis">
+<h3>📚 Epizòd ki pibliye yo</h3>
+<div id="episodes"></div>
+</div>
+
+<div class="card"><h2>Paiement $0.50 USD</h2><p>MonCash Haiti • Stripe</p><button class="btn">Payer avec MonCash</button></div>
+
+<script>
+let eps=JSON.parse(localStorage.getItem('eps')||'[]');
+function publie(){let t=document.getElementById('tit').value;let s=document.getElementById('istwa').value;if(!t||!s){alert('Ekri tit ak istwa!');return}eps.unshift({t,s,d:new Date().toLocaleDateString()});localStorage.setItem('eps',JSON.stringify(eps));affiche();document.getElementById('tit').value='';document.getElementById('istwa').value='';document.getElementById('ekri').style.display='none';alert('Epizòd pibliye!')}
+function affiche(){let h='';eps.forEach((e,i)=>{h+=`<div style='background:#fff;color:#333;padding:12px;border-radius:12px;margin:8px 0;text-align:left'><b>${e.t}</b><br><small>${e.d}</small><p>${e.s.substring(0,100)}...</p></div>`});document.getElementById('episodes').innerHTML=h||'<p>Pa gen epizòd ankò - klike + Ekri pou kòmanse!</p>'}
+affiche();
+</script>
+</body></html>
